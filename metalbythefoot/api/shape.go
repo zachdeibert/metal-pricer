@@ -26,6 +26,19 @@ func (doc *Document) GetShapeOptionsNames() []string {
 	return options
 }
 
+// GetNextShapeOptionsName gets the name of the next option available for a shape
+func (doc *Document) GetNextShapeOptionsName() string {
+	nodes := htmlquery.Find(doc.Response, `//form/div[.//select[not(option/@selected)]][1]/@id`)
+	switch len(nodes) {
+	case 0:
+		return ""
+	case 1:
+		return nodes[0].FirstChild.Data
+	default:
+		panic("Invalid XPath result")
+	}
+}
+
 // GetShapeTextFieldNames gets the names of all the text fields available for a shape
 func (doc *Document) GetShapeTextFieldNames() []string {
 	nodes := htmlquery.Find(doc.Response, `//form/div[.//input[@type="text"]]/@id`)

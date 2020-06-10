@@ -31,7 +31,9 @@ func (api *API) GetDocument(endpoint string, parameters map[string]string) (*Doc
 		params[i] = fmt.Sprintf("%s=%s", k, url.QueryEscape(v))
 		i++
 	}
-	res, err := api.client.Get(fmt.Sprintf("http://www.metalbythefoot.com%s?%s", endpoint, strings.Join(params, "&")))
+	url := fmt.Sprintf("http://www.metalbythefoot.com%s?%s", endpoint, strings.Join(params, "&"))
+	fmt.Printf("GET %s\n", url)
+	res, err := api.client.Get(url)
 	if err != nil {
 		return nil, err
 	}
