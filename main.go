@@ -8,7 +8,7 @@ import (
 
 func main() {
 	a := api.NewAPI()
-	doc, err := a.GetDocument("shape", map[string]string{})
+	doc, err := a.GetDocument(api.ShapeEndpoint, map[string]string{})
 	if err != nil {
 		panic(err)
 	}
