@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -27,7 +28,7 @@ func (api *API) GetDocument(endpoint string, parameters map[string]string) (*Doc
 	params := make([]string, len(parameters))
 	i := 0
 	for k, v := range parameters {
-		params[i] = fmt.Sprintf("%s=%s", k, v)
+		params[i] = fmt.Sprintf("%s=%s", k, url.QueryEscape(v))
 		i++
 	}
 	res, err := api.client.Get(fmt.Sprintf("http://www.metalbythefoot.com%s?%s", endpoint, strings.Join(params, "&")))
