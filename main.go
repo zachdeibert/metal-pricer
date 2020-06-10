@@ -20,5 +20,8 @@ func main() {
 	if err = ioutil.WriteFile("db.json", bin, 0755); err != nil {
 		panic(err)
 	}
+	if err = ioutil.WriteFile("db.js", []byte(fmt.Sprintf("r(%s);\n", string(bin))), 0755); err != nil {
+		panic(err)
+	}
 	fmt.Println("File written.")
 }
